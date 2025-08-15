@@ -13,7 +13,11 @@ export class userModel{
     return await prisma.user.create({data})
     }
 
-    static async login(data: Omit<CreateUserInput, "name" | "avatarUrl" | "bio">){
-        return await prisma.user.findUnique({where:{ email: data.email}})
+    static async findUserByEmail(email: string){
+        return await prisma.user.findUnique({where:{ email: email}})
+    }
+
+    static async findUserById(userId: string){
+        return prisma.user.findUnique({where: {id: userId}})
     }
 }
